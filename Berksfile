@@ -1,0 +1,1 @@
+cookbook "apt", git: 'git://github.com/hemalvarambhia/apt.git'
