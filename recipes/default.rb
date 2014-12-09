@@ -6,3 +6,9 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+node[:ruby][:dependencies].each { |dependency|
+  package dependency do
+    action :install
+  end
+}
