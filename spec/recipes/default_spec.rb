@@ -2,7 +2,11 @@ require_relative '../spec_helper'
 
 describe 'ruby::default' do
   context "on ubuntu" do
-    let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+
+    it "updates apt repo" do
+      expect(chef_run).to include_recipe "apt::default"
+    end
 
     it "installs dependencies" do
       [
