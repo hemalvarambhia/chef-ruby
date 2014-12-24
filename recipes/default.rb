@@ -6,9 +6,12 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe "apt::default"
-node[:ruby][:dependencies].each { |dependency|
-  package dependency do
-    action :install
-  end
-}
+case node.platform_family
+  when "debian"
+    include_recipe "apt::default"
+    node[:ruby][:dependencies].each { |dependency|
+      package dependency do
+        action :install
+      end
+    }
+end
