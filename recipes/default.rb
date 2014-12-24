@@ -8,7 +8,7 @@
 #
 case node.platform_family
   when "debian"
-    include_recipe "apt::default"
+    include_recipe "build-essential::default"
     node[:ruby][:dependencies].each { |dependency|
       package dependency do
         action :install

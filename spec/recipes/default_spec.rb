@@ -5,7 +5,7 @@ describe 'ruby::default' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
     it "updates apt repo" do
-      expect(chef_run).to include_recipe "apt::default"
+      expect(chef_run).to include_recipe "build-essential::default"
     end
 
     it "installs dependencies" do
