@@ -23,4 +23,12 @@ describe 'ruby::default' do
       }
     end
   end
+
+  context "on CentOS" do
+    let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.4").converge(described_recipe) }
+
+    it "updates the yum repos" do
+      expect(chef_run).to include_recipe "yum-epel::default"
+    end
+  end
 end

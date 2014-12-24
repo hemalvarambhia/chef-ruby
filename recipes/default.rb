@@ -15,4 +15,6 @@ case node.platform_family
         action :install
       end
     }
+  when "rhel"
+    include_recipe "yum-epel::default"
 end
