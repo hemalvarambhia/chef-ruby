@@ -24,14 +24,15 @@ node[:ruby][:dependencies].each { |dependency|
 }
 
 version = "1.9.2-p320"
-source_code_site = "http://ftp.ruby-lang.org/pub/ruby/#{version[0..2]}/ruby-#{version}.tar.gz"
-remote_file("ruby-#{version}.tar.gz") do
+ruby_tar_ball = "ruby-#{version}.tar.gz"
+source_code_site = "http://ftp.ruby-lang.org/pub/ruby/#{version[0..2]}/#{ruby_tar_ball}"
+remote_file(ruby_tar_ball) do
   source source_code_site
   action :create
 end
 
 install_dir = "/usr/local/src"
 execute("untar-ruby-source-code") do
-  command "tar -zxf ruby-#{version}.tar.gz -C #{install_dir}"
+  command "tar -zxf #{ruby_tar_ball} -C #{install_dir}"
   action :run
 end
