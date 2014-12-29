@@ -1,3 +1,4 @@
+default[:ruby][:version] = "1.9.2-p320"
 case node.platform_family
     when 'debian'
         default[:ruby][:dependencies] = [
