@@ -35,3 +35,8 @@ execute("untar-ruby-source-code") do
   command "tar -zxf #{ruby_tar_ball} -C #{install_dir}"
   action :run
 end
+
+execute("compile-ruby-#{node[:ruby][:version]}") do
+  command "autoconf && ./configure && make && make install"
+  action :run
+end

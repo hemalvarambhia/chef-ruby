@@ -47,4 +47,8 @@ describe 'ruby::default' do
                         )
 
   end
+
+  it "installs ruby 1.9.2-p320" do
+    expect(chef_run).to install_ruby("1.9.2-p320")
+  end
 end
