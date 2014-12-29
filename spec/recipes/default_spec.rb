@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe 'chef-ruby::default' do
+describe 'ruby::default' do
   let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
   it "installs packages for compiling C code" do
