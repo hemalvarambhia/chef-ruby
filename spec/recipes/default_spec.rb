@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe 'ruby::default' do
+describe 'chef-ruby::default' do
   let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
   it "installs packages for compiling C code" do
@@ -31,6 +31,13 @@ describe 'ruby::default' do
 
     it "updates the yum repos" do
       expect(chef_run).to include_recipe "yum-epel::default"
+    end
+
+    it "installs dependencies" do
+      ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
+       "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each { |dependency|
+        expect(chef_run).to install_package dependency
+      }
     end
   end
 end

@@ -17,4 +17,10 @@ case node.platform_family
     }
   when "rhel"
     include_recipe "yum-epel::default"
+    ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
+     "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each { |dependency|
+      package dependency do
+        action :install
+      end
+    }
 end
