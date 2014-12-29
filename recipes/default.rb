@@ -6,20 +6,19 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+include_recipe "build-essential::default"
+
 case node.platform_family
   when "debian"
     include_recipe "apt::default"
-    include_recipe "build-essential::default"
-    node[:ruby][:dependencies].each { |dependency|
-      package dependency do
-        action :install
-      end
-    }
+
   when "rhel"
     include_recipe "yum-epel::default"
-    node[:ruby][:dependencies].each { |dependency|
-      package dependency do
-        action :install
-      end
-    }
+
 end
+
+node[:ruby][:dependencies].each { |dependency|
+  package dependency do
+    action :install
+  end
+}
