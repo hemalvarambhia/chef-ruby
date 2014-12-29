@@ -30,7 +30,7 @@ remote_file(ruby_tar_ball) do
   action :create
 end
 
-install_dir = "/usr/local/src"
+install_dir = node[:ruby][:installation_dir]
 execute("untar-ruby-source-code") do
   command "tar -zxf #{ruby_tar_ball} -C #{install_dir}"
   action :run

@@ -1,4 +1,5 @@
 default[:ruby][:version] = "1.9.2-p320"
+default[:ruby][:installation_dir] = "/usr/local/src"
 case node.platform_family
     when 'debian'
         default[:ruby][:dependencies] = [
