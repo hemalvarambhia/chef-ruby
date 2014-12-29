@@ -40,4 +40,11 @@ describe 'ruby::default' do
       }
     end
   end
+
+  it "downloads the ruby source code" do
+    expect(chef_run).to create_remote_file("ruby-1.9.2-p320.tar.gz").with(
+                          source: "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
+                        )
+
+  end
 end

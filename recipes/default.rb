@@ -22,3 +22,8 @@ node[:ruby][:dependencies].each { |dependency|
     action :install
   end
 }
+
+remote_file("ruby-1.9.2-p320.tar.gz") do
+  source "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
+  action :create
+end
