@@ -30,7 +30,8 @@ remote_file("ruby-#{version}.tar.gz") do
   action :create
 end
 
+install_dir = "/usr/local/src"
 execute("untar-ruby-source-code") do
-  command "tar -zxf ruby-#{version}.tar.gz -C /usr/local/src"
+  command "tar -zxf ruby-#{version}.tar.gz -C #{install_dir}"
   action :run
 end
