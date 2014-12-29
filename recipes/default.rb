@@ -24,7 +24,8 @@ node[:ruby][:dependencies].each { |dependency|
 }
 
 version = "1.9.2-p320"
+source_code_site = "http://ftp.ruby-lang.org/pub/ruby/#{version[0..2]}/ruby-#{version}.tar.gz"
 remote_file("ruby-#{version}.tar.gz") do
-  source "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-#{version}.tar.gz"
+  source source_code_site
   action :create
 end
