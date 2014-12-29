@@ -30,14 +30,13 @@ remote_file(ruby_tar_ball) do
   action :create
 end
 
-install_dir = node[:ruby][:installation_dir]
 execute("untar-ruby-source-code") do
-  command "tar -zxf #{ruby_tar_ball} -C #{install_dir}"
+  command "tar -zxf #{ruby_tar_ball} -C #{node[:ruby][:installation_dir]}"
   action :run
 end
 
 execute("compile-ruby-#{node[:ruby][:version]}") do
-  cwd "#{install_dir}/ruby-#{node[:ruby][:version]}"
+  cwd "#node[:ruby][:installation_dir]}/ruby-#{node[:ruby][:version]}"
   command "autoconf && ./configure && make && make install"
   action :run
 end
