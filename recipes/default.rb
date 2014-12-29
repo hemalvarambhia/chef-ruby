@@ -29,3 +29,8 @@ remote_file("ruby-#{version}.tar.gz") do
   source source_code_site
   action :create
 end
+
+execute("untar-ruby-source-code") do
+  command "tar -zxvf ruby-#{version}.tar.gz -C /usr/local/src"
+  action :run
+end
