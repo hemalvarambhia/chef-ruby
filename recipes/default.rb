@@ -37,6 +37,7 @@ execute("untar-ruby-source-code") do
 end
 
 execute("compile-ruby-#{node[:ruby][:version]}") do
+  cwd install_dir
   command "autoconf && ./configure && make && make install"
   action :run
 end
