@@ -41,3 +41,7 @@ execute("compile-ruby-#{node[:ruby][:version]}") do
   command "autoconf && ./configure && make && make install"
   action :run
 end
+
+file ruby_tar_ball do
+  action :delete
+end
