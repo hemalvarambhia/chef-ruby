@@ -1,0 +1,12 @@
+language: ruby
+
+rvm:
+  - 2.0.0
+
+bundler_args: --jobs 7 --without kitchen_vagrant --without development
+
+branches:
+  only:
+    - master
+
+script: bundle exec rake travis:ci
