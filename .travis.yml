@@ -10,8 +10,6 @@ branches:
     - master
 
 before_install:
-- wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.1_x86_64.deb
-- dpkg -i vagrant_1.7.1_x86_64.deb
 - git clone https://github.com/opscode-cookbooks/apt.git ../apt
 - git clone https://github.com/opscode-cookbooks/build-essential.git ../build-essential
 - git clone https://github.com/opscode-cookbooks/yum.git ../yum
