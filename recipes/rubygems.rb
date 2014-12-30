@@ -9,3 +9,9 @@ execute("untar-rubygems-tarball") do
   command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:installation_dir]}"
   action :run
 end
+
+execute("compile-rubygems-#{rubygems_version}") do
+  cwd node[:ruby][:installation_dir]
+  command "#{node[:ruby][:installation_dir]}/bin/ruby setup.rb"
+  action :run
+end
