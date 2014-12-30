@@ -10,8 +10,8 @@ branches:
     - master
 
 before_install:
-- git clone https://github.com/opscode-cookbooks/apt.git
-- git clone https://github.com/opscode-cookbooks/build-essential.git
+- git clone https://github.com/opscode-cookbooks/apt.git ../apt
+- git clone https://github.com/opscode-cookbooks/build-essential.git ../build-essential
 - bundle install
 
 script: bundle exec rake travis:ci
