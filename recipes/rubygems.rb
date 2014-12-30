@@ -5,12 +5,12 @@ remote_file rubygems_source_tarball do
 end
 
 execute("untar-rubygems-tarball") do
-  command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:installation_dir]}/src"
+  command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:src_dir]}"
   action :run
 end
 
 execute("compile-rubygems-#{node[:ruby][:rubygems_version]}") do
-  cwd "#{node[:ruby][:installation_dir]}/src/rubygems-#{node[:ruby][:rubygems_version]}"
-  command "#{node[:ruby][:installation_dir]}/bin/ruby setup.rb"
+  cwd "#{node[:ruby][:src_dir]}/rubygems-#{node[:ruby][:rubygems_version]}"
+  command "#{node[:ruby][:bin_dir]}/ruby setup.rb"
   action :run
 end
