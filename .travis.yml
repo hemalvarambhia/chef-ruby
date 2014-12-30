@@ -8,8 +8,11 @@ bundler_args: --jobs 7 --without kitchen_vagrant --without development
 branches:
   only:
     - master
-before_script:
-- berks install
+
+before_install:
+- git clone https://github.com/opscode-cookbooks/apt.git
+- https://github.com/opscode-cookbooks/build-essential.git
+- bundle install
 
 script: bundle exec rake travis:ci
 
