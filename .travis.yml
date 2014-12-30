@@ -10,3 +10,6 @@ branches:
     - master
 
 script: bundle exec rake travis:ci
+
+after_script:
+- bundle exec kitchen destroy
