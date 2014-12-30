@@ -8,6 +8,8 @@ bundler_args: --jobs 7 --without kitchen_vagrant --without development
 branches:
   only:
     - master
+before_script:
+- berks install
 
 script: bundle exec rake travis:ci
 
