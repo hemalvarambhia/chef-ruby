@@ -10,7 +10,7 @@ execute("untar-rubygems-tarball") do
 end
 
 execute("compile-rubygems-#{node[:ruby][:rubygems_version]}") do
-  cwd node[:ruby][:installation_dir]
+  cwd "#{node[:ruby][:installation_dir]}/src/rubygems-#{node[:ruby][:rubygems_version]}"
   command "#{node[:ruby][:installation_dir]}/bin/ruby setup.rb"
   action :run
 end
