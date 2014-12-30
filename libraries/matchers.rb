@@ -4,6 +4,6 @@ if defined?(ChefSpec)
   end
 
   def install_rubygems(version)
-    run_execute("compile-rubygems-#{version}").with(command: "/usr/local/src/bin/ruby setup.rb")
+    run_execute("compile-rubygems-#{version}").with(command: "/usr/local/bin/ruby setup.rb")
   end
 end

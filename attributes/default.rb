@@ -1,6 +1,6 @@
 default[:ruby][:version] = "1.9.2-p320"
 default[:ruby][:rubygems_version] = "1.8.24"
-default[:ruby][:installation_dir] = "/usr/local/src"
+default[:ruby][:installation_dir] = "/usr/local"
 case node.platform_family
     when 'debian'
         default[:ruby][:dependencies] = [

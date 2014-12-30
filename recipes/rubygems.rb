@@ -5,7 +5,7 @@ remote_file rubygems_source_tarball do
 end
 
 execute("untar-rubygems-tarball") do
-  command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:installation_dir]}"
+  command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:installation_dir]}/src"
   action :run
 end
 
