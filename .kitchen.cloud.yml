@@ -1,7 +1,8 @@
 ---
 driver:
   name: digitalocean
-
+  driver_config:
+  digitalocean_client_id: <%= ENV['DIGITALOCEAN_CLIENT_ID'] %>
 provisioner:
   name: chef_zero
   require_chef_omnibus: latest
