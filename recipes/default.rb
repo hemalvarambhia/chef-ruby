@@ -6,7 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe "build-essential::default"
 
 case node.platform_family
   when "debian"
@@ -16,6 +15,8 @@ case node.platform_family
     include_recipe "yum-epel::default"
 
 end
+
+include_recipe "build-essential::default"
 
 node[:ruby][:dependencies].each { |dependency|
   package dependency do
