@@ -14,3 +14,7 @@ execute("compile-rubygems-#{node[:ruby][:rubygems_version]}") do
   command "#{node[:ruby][:bin_dir]}/ruby setup.rb"
   action :run
 end
+
+file rubygems_source_tarball do
+  action :delete
+end
