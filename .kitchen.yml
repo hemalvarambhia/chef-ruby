@@ -1,6 +1,7 @@
 ---
 driver:
   name: vagrant
+  name: digitalocean
 
 provisioner:
   name: chef_solo
@@ -12,6 +13,12 @@ platforms:
   - name: centos-6.4
     driver:
       name: vagrant
+  - name: digitalocean-ubuntu-10.04
+    driver:
+      name: digitalocean
+      image: ubuntu-10-04-x32
+      access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
+      ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
 
 suites:
   - name: default
