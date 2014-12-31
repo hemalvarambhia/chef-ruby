@@ -13,6 +13,7 @@ suites:
   - name: default
     run_list:
       - recipe[ruby::default]
+      - recipe[ruby::rubygems]
     attributes: {ruby: {version: "1.9.2-p320"}}
   - name: ruby-2.0
     run_list:
