@@ -1,0 +1,9 @@
+language: ruby
+bundler_args: --without kitchen_vagrant
+rvm:
+- 2.0.0
+script:
+- bundle exec rake travis --trace
+after_script:
+- bundle exec kitchen destroy
+- cat .kitchen/logs/*
