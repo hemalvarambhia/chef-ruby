@@ -15,18 +15,8 @@ namespace :integration do
       instance.test(:always)
     end
   end
-
-  desc 'Run Test Kitchen with cloud plugins'
-  task :cloud do
-    Kitchen.logger = Kitchen.default_file_logger
-    @loader = Kitchen::Loader::YAML.new(project_config: './.kitchen.cloud.yml')
-    config = Kitchen::Config.new(loader: @loader)
-    config.instances.each do |instance|
-      instance.test(:always)
-    end
-  end
 end
 
 # The default rake task should just run it all
 desc 'Run all tests on Travis'
-task travis: 'integration:cloud'
+task travis: 'integration:vagrant'
