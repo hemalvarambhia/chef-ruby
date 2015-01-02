@@ -33,6 +33,10 @@ describe 'chef-ruby::default' do
       expect(chef_run).to include_recipe "yum-epel::default"
     end
 
+    it "installs an updated autoconf" do
+      expect(chef_run).to include_recipe "chef-ruby::autoconf"
+    end
+
     it "installs dependencies" do
       ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
        "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each { |dependency|
