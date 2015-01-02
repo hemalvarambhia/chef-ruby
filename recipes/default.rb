@@ -16,7 +16,7 @@ case node.platform_family
 end
 
 include_recipe "build-essential::default"
-include_recipe "chef-ruby::autoconf"
+include_recipe "chef-ruby::autoconf" if platform?("centos")
 
 node[:ruby][:dependencies].each { |dependency|
   package dependency do
