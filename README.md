@@ -1,24 +1,19 @@
 ruby Cookbook
 =============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Installs ruby from source. The option to install rubygems is also available
+via the rubygems recipe
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
 #### packages
-- `toaster` - ruby needs toaster to brown your bagel.
+- build-essentials tools required for compiling C code
+- apt - update apt to get the latest package repositories
+- yum-epel - update yum caches to get the latest package repositories
+- yum
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### ruby::default
+#### chef-ruby::default
 <table>
   <tr>
     <th>Key</th>
@@ -27,35 +22,36 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['ruby']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>[:ruby][:source_version]</tt></td>
+    <td>String</td>
+    <td>version of ruby to install</td>
+    <td><tt>1.9.2-p320</tt></td>
+  </tr>
+  <tr>
+    <td><tt>[:ruby][:rubygems_version]</tt></td>
+    <td>String</td>
+    <td>version of rubygems to install</td>
   </tr>
 </table>
 
 Usage
 -----
 #### ruby::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `ruby` in your node's `run_list`:
+Just include `chef-ruby` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[ruby]"
+    "recipe[chef-ruby::default]"
+    "recipe[chef-ruby::rubygems]"
   ]
 }
 ```
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -65,4 +61,4 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Hemal N. Varambhia
