@@ -6,6 +6,17 @@ remote_file autoconf_tarball do
   action :create
 end
 
+execute "untar-#{autoconf_tarball}" do
+  command "tar -xzf #{autoconf_tarball} -C #{node[:ruby][:src_dir]}"
+  action :run
+end
+
+execute "build-autoconf" do
+  cwd node[:ruby][:src_dir]
+  command "./configure --prefix=/usr && make && make install"
+  action :run
+end
+
 file autoconf_tarball do
   action :delete
 end
