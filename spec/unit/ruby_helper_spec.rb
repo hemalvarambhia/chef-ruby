@@ -21,45 +21,46 @@ describe ChefRuby::Helper do
       expect(shellout).to receive(:live_stream=).and_return(nil)
       client_class.new.already_installed?
     end
-  end
+    
+    describe "same version of ruby is installed" do
+      let(:client_class) {
+        Class.new {
+          include ChefRuby::Helper
 
-  describe "same version of ruby is installed" do
-    let(:client_class) {
-      Class.new {
-        include ChefRuby::Helper
-
-        def node
-          {ruby: {version: "1.9.2-p320"}}
-        end
+          def node
+            {ruby: {version: "1.9.2-p320"}}
+          end
+        }
       }
-    }
 
-    context "different patch level" do
-      let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p319', stderr: double(empty?: true)) }
+      context "different patch level" do
+        let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p319', stderr: double(empty?: true)) }
 
-      before :each do
-        Mixlib::ShellOut.stub(:new).and_return(shellout)
+        before :each do
+          Mixlib::ShellOut.stub(:new).and_return(shellout)
+        end
+
+        it "confirms the required version is not installed" do
+          expect(shellout).to receive(:live_stream=).and_return(nil)
+
+          expect(client_class.new.already_installed?).to eq(false)
+        end
       end
 
-      it "confirms the required version is not installed" do
-        expect(shellout).to receive(:live_stream=).and_return(nil)
+      context "same patch level" do
+        let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p320', stderr: double(empty?: true)) }
 
-        expect(client_class.new.already_installed?).to eq(false)
-      end
-    end
+        before :each do
+          Mixlib::ShellOut.stub(:new).and_return(shellout)
+        end
 
-    context "same patch level" do
-      let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p320', stderr: double(empty?: true)) }
+        it "confirms the required version is not installed" do
+          expect(shellout).to receive(:live_stream=).and_return(nil)
 
-      before :each do
-        Mixlib::ShellOut.stub(:new).and_return(shellout)
-      end
-
-      it "confirms the required version is not installed" do
-        expect(shellout).to receive(:live_stream=).and_return(nil)
-
-        expect(client_class.new.already_installed?).to eq(true)
+          expect(client_class.new.already_installed?).to eq(true)
+        end
       end
     end
   end
+
 end
