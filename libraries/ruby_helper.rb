@@ -4,7 +4,8 @@ module ChefRuby
 
     def already_installed?
       command = shell_out("ruby -v | grep #{node[:ruby][:version][0..4]} | grep p#{patch_level}",  {returns: [0, 2]})
-      command.stderr.empty? and not (command.stdout=~/1\.9\.2-p320/).nil?
+      expected_version = Regexp.escape node[:ruby][:version]
+      command.stderr.empty? and not (command.stdout=~/#{expected_version}/).nil?
     end
 
     def patch_level
