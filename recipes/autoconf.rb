@@ -5,3 +5,7 @@ remote_file autoconf_tarball do
   source "http://ftp.gnu.org/gnu/autoconf/#{autoconf_tarball}"
   action :create
 end
+
+file autoconf_tarball do
+  action :delete
+end
