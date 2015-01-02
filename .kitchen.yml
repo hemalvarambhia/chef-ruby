@@ -29,16 +29,16 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[ruby::default]
-      - recipe[ruby::rubygems]
+      - recipe[chef-ruby::default]
+      - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "1.9.2-p320"}}
   - name: ruby-2.0
     run_list:
-      - recipe[ruby::default]
-      - recipe[ruby::rubygems]
+      - recipe[chef-ruby::default]
+      - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "2.0.0-p598"}}
   - name: ruby-1.8
     run_list:
-      - recipe[ruby::default]
-      - recipe[ruby::rubygems]
+      - recipe[chef-ruby::default]
+      - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "1.8.7-p374"}}
