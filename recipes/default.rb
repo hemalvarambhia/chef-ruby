@@ -13,7 +13,7 @@ case node.platform_family
 
   when "rhel"
     include_recipe "yum-epel::default"
-
+    include_recipe "chef-ruby::autoconf"
 end
 
 include_recipe "build-essential::default"
