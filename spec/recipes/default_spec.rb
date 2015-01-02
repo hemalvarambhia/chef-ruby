@@ -14,10 +14,6 @@ describe 'chef-ruby::default' do
       expect(chef_run).to include_recipe "apt::default"
     end
 
-    it "does not install the latest autoconf" do
-      expect(chef_run).to_not include_recipe "chef-ruby::autoconf"
-    end
-
     it "installs dependencies" do
       [
           "openssl", "libreadline6", "libreadline6-dev",
@@ -37,9 +33,6 @@ describe 'chef-ruby::default' do
       expect(chef_run).to include_recipe "yum-epel::default"
     end
 
-    it "installs the latest autoconf" do
-      expect(chef_run).to include_recipe "chef-ruby::autoconf"
-    end
 
     it "installs dependencies" do
       ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
@@ -47,6 +40,10 @@ describe 'chef-ruby::default' do
         expect(chef_run).to install_package dependency
       }
     end
+  end
+
+  it "installs the latest autoconf" do
+    expect(chef_run).to include_recipe "chef-ruby::autoconf"
   end
 
   it "downloads the ruby source code" do
