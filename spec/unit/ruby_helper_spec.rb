@@ -1,16 +1,17 @@
 require 'spec_helper'
 describe ChefRuby::Helper do
+  let(:client_class) {
+    Class.new {
+      include ChefRuby::Helper
+
+      def node
+        {ruby: {version: "1.9.2-p320"}}
+      end
+    }
+  }
+
   describe "checking ruby is already installed" do
     let(:shellout) { double(run_command: nil, error!: nil, stdout: '', stderr: double(empty?: true)) }
-    let(:client_class) {
-      Class.new {
-        include ChefRuby::Helper
-
-        def node
-          {ruby: {version: "1.9.2-p320"}}
-        end
-      }
-    }
 
     before :each do
       Mixlib::ShellOut.stub(:new).and_return(shellout)
@@ -24,15 +25,6 @@ describe ChefRuby::Helper do
 
     describe "different version installed" do
       let(:shellout) { double(run_command: nil, error!: nil, stdout: "1.8.7-p358", stderr: double(empty?: true)) }
-      let(:client_class) {
-        Class.new {
-          include ChefRuby::Helper
-
-          def node
-            {ruby: {version: "1.9.2-p320"}}
-          end
-        }
-      }
 
       before :each do
         Mixlib::ShellOut.stub(:new).and_return(shellout)
@@ -46,16 +38,6 @@ describe ChefRuby::Helper do
     end
 
     describe "same version of ruby is installed" do
-      let(:client_class) {
-        Class.new {
-          include ChefRuby::Helper
-
-          def node
-            {ruby: {version: "1.9.2-p320"}}
-          end
-        }
-      }
-
       context "different patch level" do
         let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p319', stderr: double(empty?: true)) }
 
