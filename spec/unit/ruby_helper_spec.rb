@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe ChefRuby::Helper do
-  describe "ruby is already installed" do
+  describe "checking ruby is already installed" do
     let(:shellout) { double(run_command: nil, error!: nil, stdout: '', stderr: double(empty?: true)) }
     let(:client_class) {
       Class.new {
