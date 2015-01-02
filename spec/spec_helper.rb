@@ -3,6 +3,7 @@ require 'chefspec'
 
 # Uncomment to use ChefSpec's Berkshelf extension
 # require 'chefspec/berkshelf'
+Dir['libraries/*.rb'].each { |f| require File.expand_path(f) }
 
 RSpec.configure do |config|
   # Specify the path for Chef Solo to find cookbooks
