@@ -7,6 +7,13 @@ describe 'chef-ruby::default' do
     expect(chef_run).to include_recipe "build-essential::default"
   end
 
+  it "downloads the ruby source code" do
+    expect(chef_run).to create_remote_file("ruby-1.9.2-p320.tar.gz").with(
+                            source: "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
+                        )
+
+  end
+
   context "on ubuntu" do
     let(:chef_run) { ChefSpec::SoloRunner.new(platform: "ubuntu", version: "12.04").converge(described_recipe) }
 
@@ -44,13 +51,6 @@ describe 'chef-ruby::default' do
 
   it "installs the latest autoconf" do
     expect(chef_run).to include_recipe "chef-ruby::autoconf"
-  end
-
-  it "downloads the ruby source code" do
-    expect(chef_run).to create_remote_file("ruby-1.9.2-p320.tar.gz").with(
-                          source: "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
-                        )
-
   end
 
   it "installs ruby 1.9.2-p320" do
