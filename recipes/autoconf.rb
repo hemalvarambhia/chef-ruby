@@ -12,7 +12,7 @@ execute "untar-#{autoconf_tarball}" do
 end
 
 execute "build-autoconf" do
-  cwd node[:ruby][:src_dir]
+  cwd "#{node[:ruby][:src_dir]}/autoconf-#{autoconf_version}"
   command "./configure --prefix=/usr && make && make install"
   action :run
 end
