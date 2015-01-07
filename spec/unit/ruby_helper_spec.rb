@@ -66,6 +66,29 @@ describe ChefRuby::Helper do
         end
       end
     end
+
+    describe "ruby 1.8 series" do
+      let(:client_class) {
+        Class.new {
+          include ChefRuby::Helper
+
+          def node
+            {ruby: {version: "1.8.7-p358"}}
+          end
+        }
+      }
+      let(:shellout) { double(run_command: nil, error!: nil, stdout: "ruby 1.8.7 (2013-06-27 patchlevel 358) [x86_64-linux]", stderr: double(empty?: true)) }
+
+      before :each do
+        Mixlib::ShellOut.stub(:new).and_return(shellout)
+      end
+
+      it "confirms ruby-1.8.x is installed" do
+        expect(shellout).to receive(:live_stream=).and_return(nil)
+
+        expect(client_class.new.already_installed?).to eq(true)
+      end
+    end
   end
 
 end

@@ -5,7 +5,10 @@ module ChefRuby
     def already_installed?
       command = shell_out("ruby -v",  {returns: [0, 2]})
       expected_version = Regexp.escape(node[:ruby][:version].gsub("-", ""))
-      command.stderr.empty? and not (command.stdout=~/#{expected_version}/).nil?
+      ruby_18x_version_output = /#{node[:ruby][:version][0..4]} \((?:\d{4}-\d{2}-\d{2}) patchlevel #{patch_level}\)/
+      ruby_version_output = /#{expected_version}/
+      command.stderr.empty? and !(command.stdout=~ruby_version_output).nil? or
+          !(command.stdout=~ruby_18x_version_output).nil?
     end
 
     def patch_level
