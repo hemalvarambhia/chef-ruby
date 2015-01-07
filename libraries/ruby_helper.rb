@@ -3,8 +3,8 @@ module ChefRuby
     include Chef::Mixin::ShellOut
 
     def already_installed?
-      command = shell_out("ruby -v | grep #{node[:ruby][:version][0..4]} | grep p#{patch_level}",  {returns: [0, 2]})
-      expected_version = Regexp.escape node[:ruby][:version]
+      command = shell_out("ruby -v",  {returns: [0, 2]})
+      expected_version = Regexp.escape(node[:ruby][:version].gsub("-", ""))
       command.stderr.empty? and not (command.stdout=~/#{expected_version}/).nil?
     end
 

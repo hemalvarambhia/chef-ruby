@@ -18,13 +18,13 @@ describe ChefRuby::Helper do
     end
 
     it "builds the correct command" do
-      expect(Mixlib::ShellOut).to receive(:new).with('ruby -v | grep 1.9.2 | grep p320', {:returns=>[0, 2]})
+      expect(Mixlib::ShellOut).to receive(:new).with('ruby -v', {:returns=>[0, 2]})
       expect(shellout).to receive(:live_stream=).and_return(nil)
       client_class.new.already_installed?
     end
 
     describe "different version installed" do
-      let(:shellout) { double(run_command: nil, error!: nil, stdout: "1.8.7-p358", stderr: double(empty?: true)) }
+      let(:shellout) { double(run_command: nil, error!: nil, stdout: "ruby 1.8.7 (2013-06-27 patchlevel 358) [x86_64-linux]", stderr: double(empty?: true)) }
 
       before :each do
         Mixlib::ShellOut.stub(:new).and_return(shellout)
@@ -39,7 +39,7 @@ describe ChefRuby::Helper do
 
     describe "same version of ruby is installed" do
       context "different patch level" do
-        let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p319', stderr: double(empty?: true)) }
+        let(:shellout) { double(run_command: nil, error!: nil, stdout: 'ruby 1.9.2p321 (2012-04-20 revision 35421) [x86_64-linux]', stderr: double(empty?: true)) }
 
         before :each do
           Mixlib::ShellOut.stub(:new).and_return(shellout)
@@ -53,7 +53,7 @@ describe ChefRuby::Helper do
       end
 
       context "same patch level" do
-        let(:shellout) { double(run_command: nil, error!: nil, stdout: '1.9.2-p320', stderr: double(empty?: true)) }
+        let(:shellout) { double(run_command: nil, error!: nil, stdout: 'ruby 1.9.2p320 (2012-04-20 revision 35421) [x86_64-linux]', stderr: double(empty?: true)) }
 
         before :each do
           Mixlib::ShellOut.stub(:new).and_return(shellout)
