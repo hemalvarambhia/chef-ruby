@@ -15,5 +15,11 @@ module ChefRuby
       start_of_patch_level = node[:ruby][:version].index("p")
       node[:ruby][:version][start_of_patch_level + 1..-1]
     end
+
+    def rubygems_already_installed?
+      command = shell_out("gem -v", {returns: [0, 2]})
+
+      command.stderr.empty? and command.stdout == node[:ruby][:rubygems_version]
+    end
   end
 end
