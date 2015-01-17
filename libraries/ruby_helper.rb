@@ -13,7 +13,12 @@ module ChefRuby
 
     def patch_level
       start_of_patch_level = node[:ruby][:version].index("p")
-      node[:ruby][:version][start_of_patch_level + 1..-1]
+
+      if start_of_patch_level
+        node[:ruby][:version][start_of_patch_level + 1..-1]
+      else
+        "0"
+      end
     end
 
     def rubygems_already_installed?

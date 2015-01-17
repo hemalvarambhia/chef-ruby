@@ -56,4 +56,14 @@ describe 'chef-ruby::default' do
   it "installs ruby 1.9.2-p320" do
     expect(chef_run).to install_ruby("1.9.2-p320")
   end
+
+  describe "installing ruby without the patch" do
+    let(:chef_run) { ChefSpec::SoloRunner.new do |node|
+      node.set[:ruby][:version] = "2.1.2"
+    end.converge(described_recipe) }
+
+    it "installs ruby 2.1.2" do
+      expect(chef_run).to install_ruby("2.1.2")
+    end
+  end
 end
