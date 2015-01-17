@@ -40,6 +40,13 @@ execute("untar-ruby-source-code") do
   action :run
 end
 
+if platform?("centos") and node.platform_version.to_f >= 6.0
+  cookbook_file "/tmp/ossl_no_ec2m.patch" do
+    source ""
+    action :create
+  end
+end
+
 execute("compile-ruby-#{node[:ruby][:version]}") do
   cwd "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:version]}"
   command "autoconf && ./configure && make && make install"
