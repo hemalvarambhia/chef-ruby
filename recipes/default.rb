@@ -40,7 +40,7 @@ execute("untar-ruby-source-code") do
   action :run
 end
 
-if platform?("centos") and node.platform_version.to_f >= 6.0
+if requires_patch?
   cookbook_file "/tmp/ossl_no_ec2m.patch" do
     source "ossl_no_ec2m.patch"
     action :create
