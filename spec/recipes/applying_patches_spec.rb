@@ -28,17 +28,17 @@ describe "chef-ruby::default" do
     end
 
     context "CentOS 6.x servers" do
-      let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0").converge(described_recipe) }
+      context "Ruby versions less than 2" do
+        let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0").converge(described_recipe) }
 
-      it "install patch"
+        it "copies the patch on to the server" do
+          expect(chef_run).to create_cookbook_file("/tmp/ossl_no_ec2m.patch").with(source: "ossl_no_ec2m.patch")
+        end
 
-      it "copies the patch on to the server" do
-        expect(chef_run).to create_cookbook_file("/tmp/ossl_no_ec2m.patch").with(source: "ossl_no_ec2m.patch")
-      end
-
-      it "applies the patch" do
-        path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
-        expect(chef_run).to run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+        it "applies the patch" do
+          path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
+          expect(chef_run).to run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+        end
       end
     end
   end
