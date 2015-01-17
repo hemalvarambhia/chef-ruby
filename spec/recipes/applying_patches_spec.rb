@@ -36,7 +36,10 @@ describe "chef-ruby::default" do
         expect(chef_run).to create_cookbook_file("/tmp/ossl_no_ec2m.patch").with(source: "ossl_no_ec2m.patch")
       end
 
-      it "applies the patch"
+      it "applies the patch" do
+        path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
+        expect(chef_run).to run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+      end
     end
   end
 end

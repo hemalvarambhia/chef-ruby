@@ -42,8 +42,13 @@ end
 
 if platform?("centos") and node.platform_version.to_f >= 6.0
   cookbook_file "/tmp/ossl_no_ec2m.patch" do
-    source ""
+    source "ossl_no_ec2m.patch"
     action :create
+  end
+
+  execute("patch -p1 < /tmp/ossl_no_ec2m.patch") do
+    cwd "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:version]}"
+    action :run
   end
 end
 
