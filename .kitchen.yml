@@ -43,7 +43,7 @@ suites:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "2.0.0-p598"}}
-  - name: ruby-2.0.0-p347
+  - name: ruby-2.0.0-p247
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
