@@ -38,11 +38,11 @@ suites:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "1.9.2-p320"}}
-  - name: ruby-2.0.0-p598
+  - name: ruby-2.0.0-p353
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.0.0-p598"}}
+    attributes: {ruby: {version: "2.0.0-p353"}}
   - name: ruby-2.0.0-p247
     run_list:
       - recipe[chef-ruby::default]
