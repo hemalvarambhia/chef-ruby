@@ -22,7 +22,7 @@ describe "chef-ruby::default" do
         expect(chef_run).to_not create_cookbook_file("/tmp/ossl_no_ec2m.patch")
       end
 
-      it "applies the patch" do
+      it "does not apply the patch" do
         expect(chef_run).to_not run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch")
       end
     end
