@@ -58,5 +58,9 @@ describe "Ruby Version" do
     it "confirms that a version with a higher patch number is later than the same version without the path number" do
       ChefRuby::Version.new("1.9.2-p320").should > ChefRuby::Version.new("1.9.2")
     end
+
+    it "confirms that version 1.11.0-p576 is older than version 2.1.0-p576" do
+      ChefRuby::Version.new("2.1.0-p576").should > ChefRuby::Version.new("1.11.0-p576")
+    end
   end
 end

@@ -19,6 +19,12 @@ platforms:
       image: ubuntu-10-04-x32
       access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
       ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
+  - name: digitalocean-ubuntu-12.04
+    driver:
+      name: digitalocean
+      image: ubuntu-12-04-x32
+      access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
+      ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
   - name: digitalocean-centos-5.8
     driver:
        name: digitalocean
