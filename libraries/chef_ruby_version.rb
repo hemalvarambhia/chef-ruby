@@ -3,7 +3,7 @@ module ChefRuby
     include Comparable
     attr_reader :version
     def initialize(version)
-      raise Exception.new("This version is invalid") if version.split(".").size < 3 or version.split(".").size > 3
+      raise Exception.new("This version is invalid") if version.split(".").size != 3
       @version = version
     end
 
