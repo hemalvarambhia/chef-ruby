@@ -1,7 +1,4 @@
-require 'serverspec'
-
-set :backend, :exec
-set :path, '/bin:/usr/local/bin:$PATH'
+require 'spec_helper'
 
 describe "installing rubygems" do
   describe command("gem -v") do
