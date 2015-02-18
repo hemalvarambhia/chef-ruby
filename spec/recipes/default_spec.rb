@@ -11,7 +11,6 @@ describe 'chef-ruby::default' do
     expect(chef_run).to create_remote_file("ruby-1.9.2-p320.tar.gz").with(
                             source: "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
                         )
-
   end
 
   context "on ubuntu" do
@@ -64,6 +63,22 @@ describe 'chef-ruby::default' do
 
     it "installs ruby 2.1.2" do
       expect(chef_run).to install_ruby("2.1.2")
+    end
+  end
+
+  describe "when ruby version is already installed" do
+    it "does not download the source code" do
+      Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(true)
+
+      expect(chef_run).to_not create_remote_file("ruby-1.9.2-p320.tar.gz").with(
+                              source: "http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p320.tar.gz"
+                          )
+    end
+
+    it "does not install ruby" do
+      Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(true)
+
+      expect(chef_run).to_not install_ruby "1.9.2-p320"
     end
   end
 end
