@@ -46,7 +46,7 @@ if requires_patch?
     action :create
   end
 
-  execute("patch -p1 < /tmp/ossl_no_ec2m.patch") do
+  execute("patch -R -p1 < /tmp/ossl_no_ec2m.patch") do
     cwd "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:version]}"
     action :run
   end
