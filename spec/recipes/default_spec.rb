@@ -25,7 +25,7 @@ describe 'chef-ruby::default' do
           "openssl", "libreadline6", "libreadline6-dev",
           "zlib1g", "zlib1g-dev", "libssl-dev",
           "libyaml-dev", "libxml2-dev", "libxslt-dev",
-          "libc6-dev", "ncurses-dev", "libtool"
+          "libc6-dev", "ncurses-dev", "libtool", "libffi-dev"
       ].each { |dependency|
         expect(chef_run).to install_package dependency
       }
