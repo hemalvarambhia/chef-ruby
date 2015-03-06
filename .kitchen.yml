@@ -39,16 +39,17 @@ platforms:
        ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
 
 suites:
+# suite names taken from https://www.ruby-lang.org/en/downloads/
   - name: default
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "1.9.2-p320"}}
-  - name: ruby-2.0.0-p353
+  - name: old_stable_200_series
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.0.0-p353"}}
+    attributes: {ruby: {version: "2.0.0-p643"}}
   - name: ruby-2.0.0-p247
     run_list:
       - recipe[chef-ruby::default]
@@ -59,8 +60,8 @@ suites:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "1.8.7-p374"}}
-  - name: ruby-2.1
+  - name: previous_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.1.0"}}
+    attributes: {ruby: {version: "2.1.5"}}
