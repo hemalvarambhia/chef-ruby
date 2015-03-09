@@ -55,7 +55,7 @@ describe 'chef-ruby::default' do
     end
 
     it "installs ruby 2.2.1" do
-      expect(chef_run).to install_ruby("2.2.1")
+      expect(chef_run).to install_ruby "2.2.1"
     end
 
     describe "installing ruby without the patch" do
@@ -64,7 +64,7 @@ describe 'chef-ruby::default' do
       end.converge(described_recipe) }
 
       it "installs ruby 2.1.2" do
-        expect(chef_run).to install_ruby("2.1.2")
+        expect(chef_run).to install_ruby "2.1.2"
       end
     end
 
