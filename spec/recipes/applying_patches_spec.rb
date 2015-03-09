@@ -11,7 +11,7 @@ describe "chef-ruby::default" do
       end
 
       it "does not apply the patch" do
-        expect(chef_run).to_not run_execute("patch -R -p1 < /tmp/ossl_no_ec2m.patch")
+        expect(chef_run).to_not run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch")
       end
     end
 
@@ -23,7 +23,7 @@ describe "chef-ruby::default" do
       end
 
       it "does not apply the patch" do
-        expect(chef_run).to_not run_execute("patch -N -p1 < /tmp/ossl_no_ec2m.patch")
+        expect(chef_run).to_not run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch")
       end
     end
 
@@ -36,8 +36,10 @@ describe "chef-ruby::default" do
         end
 
         it "applies the patch" do
+          Chef::Resource::Execute.any_instance.stub(:patch_not_already_applied?).and_return(true)
+
           path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
-          expect(chef_run).to run_execute("patch -R -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+          expect(chef_run).to run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
         end
       end
 
@@ -51,8 +53,10 @@ describe "chef-ruby::default" do
         end
 
         it "applies the patch" do
+          Chef::Resource::Execute.any_instance.stub(:patch_not_already_applied?).and_return(true)
+
           path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
-          expect(chef_run).to run_execute("patch -R -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+          expect(chef_run).to run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
         end
       end
 
@@ -67,7 +71,7 @@ describe "chef-ruby::default" do
 
         it "does not apply the patch" do
           path_to_ruby_src = "#{chef_run.node[:ruby][:src_dir]}/ruby-#{chef_run.node[:ruby][:version]}"
-          expect(chef_run).to_not run_execute("patch -R -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
+          expect(chef_run).to_not run_execute("patch -p1 < /tmp/ossl_no_ec2m.patch").with(cwd: path_to_ruby_src)
         end
       end
     end
