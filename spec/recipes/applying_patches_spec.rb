@@ -29,7 +29,9 @@ describe "chef-ruby::default" do
 
     context "CentOS 6.x servers" do
       context "Ruby versions less than 2" do
-        let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0").converge(described_recipe) }
+        let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0") do |node|
+          node.set[:ruby][:version] = "1.9.2-p320"
+        end.converge(described_recipe) }
 
         it "copies the patch on to the server" do
           expect(chef_run).to create_cookbook_file("/tmp/ossl_no_ec2m.patch").with(source: "ossl_no_ec2m.patch")
