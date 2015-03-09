@@ -33,7 +33,7 @@
 #  * 'just' rspec: 'rspec'
 
 guard :rspec, cmd: "rspec -cfd" do
-  watch(/^libraries\/(.+)\.rb$/)
+  watch(/^libraries\/(.+)\.rb$/) { "spec" }
   watch(/^spec\/(.+)_spec\.rb$/)
   watch(/^recipes\/(.+)\.rb$/)   { "spec" }
   watch('spec/spec_helper.rb')      { 'spec' }
