@@ -26,6 +26,14 @@ module ChefRuby
 
       command.stderr.empty? and command.stdout == node[:ruby][:rubygems_version]
     end
+
+    def patch_not_already_applied?
+      patch_dry_run_command = shell_out("patch --dry-run -p1 < /tmp/ossl_no_ec2m.patch",
+                                        cwd: "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:version]}",
+                                        returns: [0, 2])
+
+      patch_dry_run_command.exitstatus == 0
+    end
   end
 end
 
@@ -34,3 +42,4 @@ def requires_patch?
   platform?("centos") and node.platform_version.to_f >= 6.0 and
       ChefRuby::Version.new(node[:ruby][:version]) <= ChefRuby::Version.new("2.0.0-p247")
 end
+
