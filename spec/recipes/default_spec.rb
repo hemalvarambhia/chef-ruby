@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
 
 describe 'chef-ruby::default' do
-  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  describe "installing the latest stable release" do
+    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
-  describe "installing the currently stable release" do
     it "installs packages for compiling C code" do
       expect(chef_run).to include_recipe "build-essential::default"
     end
@@ -54,7 +54,7 @@ describe 'chef-ruby::default' do
     end
 
     it "installs ruby 2.2.1" do
-      expect(chef_run).to install_ruby("2.2.1")
+      expect(chef_run).to install_ruby "2.2.1"
     end
 
     describe "installing ruby without the patch" do
@@ -63,7 +63,7 @@ describe 'chef-ruby::default' do
       end.converge(described_recipe) }
 
       it "installs ruby 2.1.2" do
-        expect(chef_run).to install_ruby("2.1.2")
+        expect(chef_run).to install_ruby "2.1.2"
       end
     end
 

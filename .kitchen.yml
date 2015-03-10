@@ -40,11 +40,6 @@ platforms:
 
 suites:
 # suite names taken from https://www.ruby-lang.org/en/downloads/
-  - name: default
-    run_list:
-      - recipe[chef-ruby::default]
-      - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "1.9.2-p320"}}
   - name: current_stable
     run_list:
       - recipe[chef-ruby::default]
