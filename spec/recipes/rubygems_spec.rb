@@ -3,6 +3,11 @@ require_relative '../spec_helper'
 describe 'chef-ruby::rubygems' do
   let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
+  before :each do
+    Chef::Resource::RemoteFile.any_instance.stub(:rubygems_already_installed?).and_return(false)
+    Chef::Resource::Execute.any_instance.stub(:rubygems_already_installed?).and_return(false)
+  end
+
   context "when rubygems is not already installed" do
     it "downloads the rubygems source code" do
       expect(chef_run).to create_remote_file("rubygems-1.8.24.tgz").with(

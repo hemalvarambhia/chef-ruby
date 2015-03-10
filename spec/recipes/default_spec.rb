@@ -4,6 +4,11 @@ describe 'chef-ruby::default' do
   describe "installing the latest stable release" do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
+    before :each do
+      Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(false)
+      Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(false)
+    end
+
     it "installs packages for compiling C code" do
       expect(chef_run).to include_recipe "build-essential::default"
     end
