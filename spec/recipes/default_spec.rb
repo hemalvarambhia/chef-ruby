@@ -7,6 +7,8 @@ describe 'chef-ruby::default' do
     before :each do
       Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(false)
       Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(false)
+      Chef::Resource::RemoteFile.any_instance.stub(:autoconf_already_installed?).and_return(true)
+      Chef::Resource::Execute.any_instance.stub(:autoconf_already_installed?).and_return(true)
     end
 
     it "installs packages for compiling C code" do

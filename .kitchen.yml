@@ -59,3 +59,4 @@ suites:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "2.0.0-p247"}}
+

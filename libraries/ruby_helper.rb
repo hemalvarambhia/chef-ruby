@@ -39,6 +39,17 @@ module ChefRuby
       patch_dry_run_command.exitstatus == 0
     end
   end
+
+  module AutoconfHelper
+    include Chef::Mixin::ShellOut
+
+    def autoconf_already_installed?(version)
+      autoconf_installed_command = shell_out("[ -x /usr/bin/autoconf ] && /usr/bin/autoconf -V", returns: [0, 2])
+
+      first_line = autoconf_installed_command.stdout.split("\n")[0]
+      autoconf_installed_command.stderr.empty? and first_line.include? version
+    end
+  end
 end
 
 def requires_patch?
