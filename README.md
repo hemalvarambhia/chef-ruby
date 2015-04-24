@@ -25,12 +25,13 @@ Attributes
     <td><tt>[:ruby][:source_version]</tt></td>
     <td>String</td>
     <td>version of ruby to install</td>
-    <td><tt>1.9.2-p320</tt></td>
+    <td><tt>2.2.1</tt></td>
   </tr>
   <tr>
     <td><tt>[:ruby][:rubygems_version]</tt></td>
     <td>String</td>
     <td>version of rubygems to install</td>
+    <td>1.8.24</td>
   </tr>
 </table>
 
