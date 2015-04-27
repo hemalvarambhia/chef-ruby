@@ -11,6 +11,9 @@ Requirements
 - yum-epel - update yum caches to get the latest package repositories
 - yum
 
+#### Operating systems
+Ubuntu 10.04 and 12.04, CentOS 5 and 6
+
 Attributes
 ----------
 #### chef-ruby::default
