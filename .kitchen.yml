@@ -7,6 +7,9 @@ provisioner:
   name: chef_solo
 
 platforms:
+  - name: ubuntu-14.04
+    driver:
+      name: vagrant
   - name: ubuntu-12.04
     driver:
       name: vagrant
@@ -38,25 +41,17 @@ suites:
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.2.1"} }
+    attributes: {ruby: {version: "2.2.2"} }
   - name: previous_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.1.5"}}
+    attributes: {ruby: {version: "2.1.6"}}
   - name: old_stable_200_series
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.0.0-p643"}}
-  - name: old_stable_193_series
-    run_list:
-      - recipe[chef-ruby::default]
-      - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "1.9.3-p551"}}
-  - name: ruby-2.0.0-p247
-    run_list:
-      - recipe[chef-ruby::default]
-      - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.0.0-p247"}}
+    attributes: {ruby: {version: "2.0.0-p645"}}
+
+
 
