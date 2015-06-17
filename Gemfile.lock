@@ -120,8 +120,8 @@ GEM
     kitchen-digitalocean (0.8.3)
       droplet_kit (~> 1.0)
       test-kitchen (~> 1.2)
-    kitchen-vagrant (0.15.0)
-      test-kitchen (~> 1.0)
+    kitchen-vagrant (0.18.0)
+      test-kitchen (~> 1.4)
     libyajl2 (1.2.0)
     listen (2.8.4)
       celluloid (>= 0.15.2)
@@ -144,7 +144,7 @@ GEM
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
+    net-ssh (2.9.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     net-ssh-multi (1.2.0)
@@ -242,8 +242,8 @@ GEM
       net-scp
       net-ssh
     systemu (2.6.4)
-    test-kitchen (1.2.1)
-      mixlib-shellout (~> 1.2)
+    test-kitchen (1.4.0)
+      mixlib-shellout (>= 1.2, < 3.0)
       net-scp (~> 1.1)
       net-ssh (~> 2.7)
       safe_yaml (~> 1.0)
@@ -272,8 +272,11 @@ DEPENDENCIES
   chefspec (~> 4.0)
   guard-rspec
   kitchen-digitalocean
-  kitchen-vagrant (~> 0.14)
+  kitchen-vagrant (~> 0.18)
   rake (~> 10.1)
   rubocop (~> 0.24.0)
   serverspec
-  test-kitchen (~> 1.2)
+  test-kitchen (~> 1.4)
+
+BUNDLED WITH
+   1.10.3

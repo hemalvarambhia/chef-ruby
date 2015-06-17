@@ -10,8 +10,8 @@ group :development do
 end
 
 group :integration do
-    gem 'test-kitchen',    '~> 1.2'
-    gem 'kitchen-vagrant', '~> 0.14'
+    gem 'test-kitchen',    '~> 1.4'
+    gem 'kitchen-vagrant', '~> 0.18'
     gem 'kitchen-digitalocean'
     gem 'serverspec'
 end
