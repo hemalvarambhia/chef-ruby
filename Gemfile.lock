@@ -277,6 +277,3 @@ DEPENDENCIES
   rubocop (~> 0.24.0)
   serverspec
   test-kitchen (~> 1.4)
-
-BUNDLED WITH
-   1.10.3
