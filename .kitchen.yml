@@ -31,6 +31,13 @@ platforms:
       image: ubuntu-12-04-x32
       access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
       ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
+  - name: digitalocean-centos-7.0
+    driver:
+       name: digitalocean
+       image: centos-7-0-x64
+       access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
+       ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
+       size: 1gb
   - name: digitalocean-centos-5.8
     driver:
        name: digitalocean
