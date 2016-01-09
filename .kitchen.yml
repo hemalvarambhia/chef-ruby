@@ -58,17 +58,17 @@ suites:
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.2.2"} }
+    attributes: {ruby: {version: "2.3.0"} }
   - name: previous_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.1.6"}}
-  - name: old_stable_200_series
+    attributes: {ruby: {version: "2.2.4"}}
+  - name: old_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.0.0-p645"}}
+    attributes: {ruby: {version: "2.1.8"}}
 
 
 
