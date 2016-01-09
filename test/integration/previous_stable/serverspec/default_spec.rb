@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "installing ruby" do
   describe command("ruby -v") do
     its(:stdout) {
-      should match "ruby 2.1.6"
+      should match "ruby 2.2.4"
     }
   end
 end
