@@ -2,17 +2,13 @@ require_relative '../spec_helper'
 
 describe 'chef-ruby::default' do
   describe "installing the latest stable release" do
-    let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
 
     before :each do
       Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(false)
       Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(false)
       Chef::Resource::RemoteFile.any_instance.stub(:autoconf_already_installed?).and_return(true)
       Chef::Resource::Execute.any_instance.stub(:autoconf_already_installed?).and_return(true)
-    end
-
-    it "installs packages for compiling C code" do
-      expect(chef_run).to include_recipe "build-essential::default"
     end
 
     it "downloads the ruby source code" do
@@ -25,7 +21,13 @@ describe 'chef-ruby::default' do
       let(:chef_run) { ChefSpec::SoloRunner.new(platform: "ubuntu", version: "12.04").converge(described_recipe) }
 
       it "updates apt repo" do
-        expect(chef_run).to include_recipe "apt::default"
+        expect(chef_run).to run_execute 'apt-get update'
+      end
+
+      it "installs packages for compiling C code" do
+        %w{autoconf binutils-doc bison build-essential flex gettext ncurses-dev}.each do |pkg|
+          expect(chef_run).to install_package pkg
+        end
       end
 
       it "installs dependencies" do
@@ -44,9 +46,14 @@ describe 'chef-ruby::default' do
       let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.4").converge(described_recipe) }
 
       it "updates the yum repos" do
-        expect(chef_run).to include_recipe "yum-epel::default"
+        expect(chef_run).to run_execute 'yum -y update'
       end
 
+      it 'installs packages for compiling C code' do
+        %w{autoconf bison flex gcc gcc-c++ kernel-devel make m4 patch}.each do |pkg|
+          expect(chef_run).to install_package pkg
+        end
+      end
 
       it "installs dependencies" do
         ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",

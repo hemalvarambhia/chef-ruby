@@ -11,13 +11,28 @@ Chef::Resource::Execute.send(:include, ChefRuby::Helper)
 
 case node.platform_family
   when "debian"
-    include_recipe "apt::default"
+    execute 'apt-get update' do
+      action :run
+    end
+
+    %w{autoconf binutils-doc bison build-essential flex gettext ncurses-dev}.each do |dev_tool|
+      package dev_tool do
+        action :install
+      end
+    end
 
   when "rhel"
-    include_recipe "yum-epel::default"
+    execute 'yum -y update' do
+      action :run
+    end
+
+    %w{autoconf bison flex gcc gcc-c++ kernel-devel make m4 patch}.each do |dev_tool|
+       package dev_tool do
+         action :install
+       end
+    end
 end
 
-include_recipe "build-essential::default"
 include_recipe "chef-ruby::autoconf"
 
 node[:ruby][:dependencies].each { |dependency|

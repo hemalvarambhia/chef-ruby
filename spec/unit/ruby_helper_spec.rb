@@ -15,10 +15,11 @@ describe ChefRuby::Helper do
 
     before :each do
       Mixlib::ShellOut.stub(:new).and_return(shellout)
+      allow(shellout).to receive :live_stream
     end
 
     it "builds the correct command" do
-      expect(Mixlib::ShellOut).to receive(:new).with('[ -x /usr/local/bin/ruby ] && /usr/local/bin/ruby -v', {:returns=>[0, 2]})
+      expect(Mixlib::ShellOut).to receive(:new).with('[ -x /usr/local/bin/ruby ] && /usr/local/bin/ruby -v', hash_including(:returns=>[0, 2]))
       expect(shellout).to receive(:live_stream=).and_return(nil)
       client_class.new.already_installed?
     end
