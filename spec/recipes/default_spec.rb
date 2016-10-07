@@ -1,24 +1,34 @@
 require_relative '../spec_helper'
 
 describe 'chef-ruby::default' do
-  describe "installing the latest stable release" do
-    let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::SoloRunner.converge(described_recipe) }
 
+  before :each do
+    Chef::Resource::RemoteFile.
+        any_instance.stub(:autoconf_already_installed?).and_return(true)
+    Chef::Resource::Execute.
+        any_instance.stub(:autoconf_already_installed?).and_return(true)
+  end
+
+  describe "installing the latest stable release" do
     before :each do
-      Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(false)
-      Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(false)
-      Chef::Resource::RemoteFile.any_instance.stub(:autoconf_already_installed?).and_return(true)
-      Chef::Resource::Execute.any_instance.stub(:autoconf_already_installed?).and_return(true)
+      Chef::Resource::RemoteFile.
+          any_instance.stub(:already_installed?).and_return(false)
+      Chef::Resource::Execute.
+          any_instance.stub(:already_installed?).and_return(false)
     end
 
     it "downloads the ruby source code" do
-      expect(chef_run).to create_remote_file("ruby-2.2.1.tar.gz").with(
-                              source: "http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.gz"
-                          )
+      expect(chef_run).to(
+          create_remote_file("ruby-2.2.1.tar.gz").
+              with(source: "http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.gz"))
     end
 
     context "on ubuntu" do
-      let(:chef_run) { ChefSpec::SoloRunner.new(platform: "ubuntu", version: "12.04").converge(described_recipe) }
+      let(:chef_run) do
+        ChefSpec::SoloRunner.new(platform: "ubuntu", version: "12.04").
+            converge(described_recipe)
+      end
 
       it "updates apt repo" do
         expect(chef_run).to run_execute 'apt-get update'
@@ -43,7 +53,10 @@ describe 'chef-ruby::default' do
     end
 
     context "on CentOS" do
-      let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.4").converge(described_recipe) }
+      let(:chef_run) do
+        ChefSpec::SoloRunner.new(platform: "centos", version: "6.4").
+            converge(described_recipe)
+      end
 
       it "updates the yum repos" do
         expect(chef_run).to run_execute 'yum -y update'
@@ -57,9 +70,9 @@ describe 'chef-ruby::default' do
 
       it "installs dependencies" do
         ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
-         "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each { |dependency|
+         "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each do |dependency|
           expect(chef_run).to install_package dependency
-        }
+        end
       end
     end
 
@@ -72,30 +85,34 @@ describe 'chef-ruby::default' do
     end
 
     describe "installing ruby without the patch" do
-      let(:chef_run) { ChefSpec::SoloRunner.new do |node|
-        node.set[:ruby][:version] = "2.1.2"
-      end.converge(described_recipe) }
+      let(:chef_run) do
+        ChefSpec::SoloRunner.new do |node|
+          node.set[:ruby][:version] = "2.1.2"
+        end.converge(described_recipe)
+      end
 
       it "installs ruby 2.1.2" do
         expect(chef_run).to install_ruby "2.1.2"
       end
     end
+  end
 
-    describe "when ruby version is already installed" do
-      it "does not download the source code" do
-        Chef::Resource::RemoteFile.any_instance.stub(:already_installed?).and_return(true)
-
-        expect(chef_run).to_not create_remote_file("ruby-2.2.1.tar.gz").with(
-                                    source: "http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.gz"
-                                )
-      end
-
-      it "does not install ruby" do
-        Chef::Resource::Execute.any_instance.stub(:already_installed?).and_return(true)
-
-        expect(chef_run).to_not install_ruby "2.2.1"
-      end
+  describe "when ruby version is already installed" do
+    before :each do
+      Chef::Resource::RemoteFile.
+          any_instance.stub(:already_installed?).and_return(true)
+      Chef::Resource::Execute.
+          any_instance.stub(:already_installed?).and_return(true)
     end
 
+    it "does not download the source code" do
+      expect(chef_run).to_not(
+          create_remote_file("ruby-2.2.1.tar.gz")
+      )
+    end
+
+    it "does not install ruby" do
+      expect(chef_run).to_not install_ruby "2.2.1"
+    end
   end
 end
