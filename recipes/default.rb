@@ -70,7 +70,7 @@ end
 
 execute("compile-ruby-#{node[:ruby][:version]}") do
   cwd "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:version]}"
-  command "autoconf && ./configure && make && make install"
+  command 'autoconf && ./configure --disable-install-doc && make && make install'
   not_if { already_installed? }
   action :run
 end
