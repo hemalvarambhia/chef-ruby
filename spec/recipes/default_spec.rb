@@ -69,8 +69,9 @@ describe 'chef-ruby::default' do
       end
 
       it 'installs dependencies' do
-        ["readline", "readline-devel", "zlib", "zlib-devel", "libyaml-devel", "libffi-devel", "bzip2", "libtool",
-         "openssl", "openssl-devel", "libxml2", "libxml2-devel", "libxslt", "libxslt-devel"].each do |dependency|
+        %w{readline readline-devel zlib zlib-devel libyaml-devel
+           libffi-devel bzip2 libtool openssl openssl-devel libxml2
+           libxml2-devel libxslt libxslt-devel}.each do |dependency|
           expect(chef_run).to install_package dependency
         end
       end
