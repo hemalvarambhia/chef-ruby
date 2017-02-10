@@ -1,7 +1,6 @@
 ---
 driver:
   name: vagrant
-  name: digitalocean
 
 provisioner:
   name: chef_solo
