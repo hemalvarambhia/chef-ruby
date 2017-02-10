@@ -10,59 +10,28 @@ platforms:
   - name: ubuntu-14.04
     driver:
       name: vagrant
-  - name: ubuntu-12.04
-    driver:
-      name: vagrant
-  - name: centos-6.4
-    driver:
-      name: vagrant
+      box: ubuntu/trusty64
   - name: centos-7.0
     driver:
       name: vagrant
-  - name: digitalocean-ubuntu-14.04
-    driver:
-      name: digitalocean
-      image: ubuntu-14-04-x32
-      access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
-      ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
-  - name: digitalocean-ubuntu-12.04
-    driver:
-      name: digitalocean
-      image: ubuntu-12-04-x32
-      access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
-      ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
-  - name: digitalocean-centos-6.5
-    driver:
-       name: digitalocean
-       image: centos-6-5-x64
-       access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
-       ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
-       size: 2gb
-  - name: digitalocean-centos-7.0
-    driver:
-       name: digitalocean
-       image: centos-7-0-x64
-       access_token: <%= ENV['DIGITALOCEAN_ACCESS_TOKEN'] %>
-       ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
-       size: 1gb
-
+      box: centos/7
 suites:
 # suite names taken from https://www.ruby-lang.org/en/downloads/
   - name: current_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.3.0"} }
+    attributes: {ruby: {version: "2.4.0"} }
   - name: previous_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.2.4"}}
+    attributes: {ruby: {version: "2.3.3"}}
   - name: old_stable
     run_list:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
-    attributes: {ruby: {version: "2.1.8"}}
+    attributes: {ruby: {version: "2.2.6"}}
 
 
 

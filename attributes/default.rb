@@ -1,5 +1,5 @@
-default[:ruby][:version] = "2.2.1"
-default[:ruby][:rubygems_version] = "1.8.24"
+default[:ruby][:version] = "2.4.0"
+default[:ruby][:rubygems_version] = "2.6.10"
 default[:ruby][:installation_dir] = "/usr/local"
 default[:ruby][:src_dir] = "#{node[:ruby][:installation_dir]}/src"
 default[:ruby][:bin_dir] = "#{node[:ruby][:installation_dir]}/bin"
