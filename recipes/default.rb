@@ -9,7 +9,7 @@
 Chef::Resource::RemoteFile.send(:include, ChefRuby::Helper)
 Chef::Resource::Execute.send(:include, ChefRuby::Helper)
 
-case node.platform_family
+case node[:platform_family]
   when "debian"
     execute 'apt-get update' do
       action :run

@@ -54,7 +54,7 @@ end
 
 def requires_patch?
 
-  platform?("centos") and node.platform_version.to_f >= 6.0 and
+  platform?("centos") and node[:platform_version].to_f >= 6.0 and
       ChefRuby::Version.new(node[:ruby][:version]) <= ChefRuby::Version.new("2.0.0-p247")
 end
 
