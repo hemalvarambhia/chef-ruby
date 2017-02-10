@@ -1,4 +1,5 @@
 default[:ruby][:version] = "2.4.0"
+default[:ruby][:uninstall][:version] = '2.3.3'
 default[:ruby][:rubygems_version] = "2.6.10"
 default[:ruby][:installation_dir] = "/usr/local"
 default[:ruby][:src_dir] = "#{node[:ruby][:installation_dir]}/src"

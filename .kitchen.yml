@@ -31,6 +31,11 @@ suites:
       - recipe[chef-ruby::default]
       - recipe[chef-ruby::rubygems]
     attributes: {ruby: {version: "2.2.6"}}
+  - name: uninstall
+    run_list:
+      - recipe[chef-ruby::default]
+      - recipe[chef-ruby::uninstall]
+    attributes: {ruby: {version: "2.3.3"}, {uninstall: {version: "2.4.0"}}}
 
 
 
