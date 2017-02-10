@@ -36,7 +36,7 @@ describe "chef-ruby::default" do
     context "CentOS 6.x servers" do
       context "Ruby versions less than 2" do
         let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0") do |node|
-          node.set[:ruby][:version] = "1.9.2-p320"
+          node.normal[:ruby][:version] = "1.9.2-p320"
         end.converge(described_recipe) }
 
         it "copies the patch on to the server" do
@@ -53,7 +53,7 @@ describe "chef-ruby::default" do
 
       context "Ruby version 2.0.0-p247" do
         let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0") do |node|
-          node.set[:ruby][:version] = "2.0.0-p247"
+          node.normal[:ruby][:version] = "2.0.0-p247"
         end.converge(described_recipe) }
 
         it "copies the patch on to the server" do
@@ -70,7 +70,7 @@ describe "chef-ruby::default" do
 
       context "Ruby version > 2.0.0-p247" do
         let(:chef_run) { ChefSpec::SoloRunner.new(platform: "centos", version: "6.0") do |node|
-          node.set[:ruby][:version] = "2.0.0-p598"
+          node.normal[:ruby][:version] = "2.0.0-p598"
         end.converge(described_recipe) }
 
         it "does not copy the patch on to the server" do
