@@ -15,9 +15,9 @@ execute "untar-#{autoconf_tarball}" do
   action :run
 end
 
-execute "build-autoconf" do
+execute 'build-autoconf' do
   cwd "#{node[:ruby][:src_dir]}/autoconf-#{autoconf_version}"
-  command "./configure --prefix=/usr && make && make install"
+  command './configure --prefix=/usr && make && make install'
   not_if { autoconf_already_installed?(autoconf_version) }
   action :run
 end

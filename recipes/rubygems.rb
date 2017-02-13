@@ -8,13 +8,13 @@ remote_file rubygems_source_tarball do
   action :create
 end
 
-execute("untar-rubygems-tarball") do
+execute 'untar-rubygems-tarball' do
   command "tar -zxf #{rubygems_source_tarball} -C #{node[:ruby][:src_dir]}"
   not_if { rubygems_already_installed? }
   action :run
 end
 
-execute("compile-rubygems-#{node[:ruby][:rubygems_version]}") do
+execute "compile-rubygems-#{node[:ruby][:rubygems_version]}" do
   cwd "#{node[:ruby][:src_dir]}/rubygems-#{node[:ruby][:rubygems_version]}"
   command "#{node[:ruby][:bin_dir]}/ruby setup.rb"
   not_if { rubygems_already_installed? }
