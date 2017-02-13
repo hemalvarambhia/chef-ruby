@@ -1,6 +1,3 @@
-Chef::Resource::RemoteFile.send(:include, ChefRuby::AutoconfHelper)
-Chef::Resource::Execute.send(:include, ChefRuby::AutoconfHelper)
-
 autoconf_version = "2.69"
 autoconf_tarball = "autoconf-#{autoconf_version}.tar.gz"
 remote_file autoconf_tarball do
