@@ -21,7 +21,7 @@ describe ChefRuby::Helper do
     it "builds the correct command" do
       expect(Mixlib::ShellOut).to receive(:new).with('[ -x /usr/local/bin/ruby ] && /usr/local/bin/ruby -v', hash_including(:returns=>[0, 2]))
       expect(shellout).to receive(:live_stream=).and_return(nil)
-      client_class.new.already_installed?
+      client_class.new.already_installed?('1.9.2-p320')
     end
 
     context "when ruby is not installed" do
@@ -34,7 +34,7 @@ describe ChefRuby::Helper do
       it "confirms the required version is not installed" do
         expect(shellout).to receive(:live_stream=).and_return(nil)
 
-        expect(client_class.new.already_installed?).to eq(false)
+        expect(client_class.new.already_installed?('1.9.2-p320')).to eq(false)
       end
     end
 
@@ -48,7 +48,7 @@ describe ChefRuby::Helper do
       it "confirms the required version is not installed" do
         expect(shellout).to receive(:live_stream=).and_return(nil)
 
-        expect(client_class.new.already_installed?).to eq(false)
+        expect(client_class.new.already_installed?('1.9.2-p320')).to eq(false)
       end
     end
 
@@ -63,7 +63,7 @@ describe ChefRuby::Helper do
         it "confirms the required version is not installed" do
           expect(shellout).to receive(:live_stream=).and_return(nil)
 
-          expect(client_class.new.already_installed?).to eq(false)
+          expect(client_class.new.already_installed?('1.9.2-p320')).to eq(false)
         end
       end
 
@@ -77,7 +77,7 @@ describe ChefRuby::Helper do
         it "confirms the required version is not installed" do
           expect(shellout).to receive(:live_stream=).and_return(nil)
 
-          expect(client_class.new.already_installed?).to eq(true)
+          expect(client_class.new.already_installed?('1.9.2-p320')).to eq(true)
         end
       end
     end
@@ -101,7 +101,7 @@ describe ChefRuby::Helper do
       it "confirms ruby-1.8.x is installed" do
         expect(shellout).to receive(:live_stream=).and_return(nil)
 
-        expect(client_class.new.already_installed?).to eq(true)
+        expect(client_class.new.already_installed?('1.8.7-p358')).to eq(true)
       end
     end
   end
