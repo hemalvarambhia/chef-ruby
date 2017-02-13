@@ -12,7 +12,7 @@ Requirements
 - yum
 
 #### Operating systems
-Ubuntu 10.04 and 12.04, CentOS 5 and 6
+Ubuntu 14.04, CentOS 7
 
 Attributes
 ----------
@@ -28,13 +28,19 @@ Attributes
     <td><tt>[:ruby][:source_version]</tt></td>
     <td>String</td>
     <td>version of ruby to install</td>
-    <td><tt>2.2.1</tt></td>
+    <td><tt>2.4.0</tt></td>
   </tr>
+  <tr>
+      <td><tt>[:ruby][:uninstall][:version]</tt></td>
+      <td>String</td>
+      <td>version of ruby to install</td>
+      <td><tt>2.3.3</tt></td>
+    </tr>
   <tr>
     <td><tt>[:ruby][:rubygems_version]</tt></td>
     <td>String</td>
     <td>version of rubygems to install</td>
-    <td>1.8.24</td>
+    <td>2.6.10</td>
   </tr>
 </table>
 
