@@ -31,16 +31,16 @@ Attributes
     <td><tt>2.4.0</tt></td>
   </tr>
   <tr>
-      <td><tt>[:ruby][:uninstall][:version]</tt></td>
-      <td>String</td>
-      <td>version of ruby to install</td>
-      <td><tt>2.3.3</tt></td>
-    </tr>
+    <td><tt>[:ruby][:uninstall][:version]</tt></td>
+    <td>String</td>
+    <td>version of ruby to install</td>
+    <td><tt>2.3.3</tt></td>
+  </tr>
   <tr>
     <td><tt>[:ruby][:rubygems_version]</tt></td>
     <td>String</td>
     <td>version of rubygems to install</td>
-    <td>2.6.10</td>
+    <td><tt>2.6.10</tt></td>
   </tr>
 </table>
 
