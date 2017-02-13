@@ -1,5 +1,6 @@
 execute "uninstall-ruby-#{node[:ruby][:uninstall][:version]}" do
   cwd "#{node[:ruby][:src_dir]}/ruby-#{node[:ruby][:uninstall][:version]}"
+  only_if { already_installed?(node[:ruby][:uninstall][:version]) }
   command 'sudo make uninstall'
   action :run
 end
